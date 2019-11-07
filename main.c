@@ -19,7 +19,7 @@ struct data* init()
 {
 	struct data* lst;
 	lst = (struct data*)malloc(sizeof(struct data));
-	lst->ptr = NULL; 
+	lst->ptr = NULL;
 	return (lst);
 }
 
@@ -60,12 +60,12 @@ struct data* appendlist(struct data** headRef)
 	struct data* lst;
 	lst = (struct data*)malloc(sizeof(struct data));
 	lst->ptr = NULL;
-	
+
 	if (current == NULL) {
 		*headRef = lst;
 	}
 	else {
-		
+
 		while (current->ptr != NULL) {
 			current = current->ptr;
 		}
@@ -123,7 +123,7 @@ void input(struct data** headRef, int* cnt)
 	FILE* finit;
 	char line[100];
 	struct data* current;
-	fin = fopen("test.txt", "r"); 
+	fin = fopen("test.txt", "r");
 	if (fin == NULL)
 	{
 		finit = fopen("test.txt", "w");
@@ -156,7 +156,7 @@ void save(struct data* head)
 {
 	FILE* fout;
 	struct data* current = head;
-	fout = fopen("test.txt", "w"); 
+	fout = fopen("test.txt", "w");
 	while (current != NULL)
 	{
 		fprintf(fout, "%s\n", current->name);
@@ -164,5 +164,5 @@ void save(struct data* head)
 		fprintf(fout, "%d %d %d %d\n", current->num, current->day, current->st_vis, current->end_vis);
 		current = current->ptr;
 	}
-	fclose(fout); 
+	fclose(fout);
 }
