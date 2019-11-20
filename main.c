@@ -212,12 +212,12 @@ void addDoc(struct data** head, int* cnt)
 	} while (flag);
 	flag = 0;
 	system("cls");
-	printf("Enter your doctor’s specialty:\n");
+	printf("Enter your doctor's specialty:\n");
 	for (i = 0; i < 6; i++)
 	{
 		printf("[%d]%s\n", i + 1, spec[i]);
 	}
-	printf("Select a doctor’s specialty (1-6): ");
+	printf("Select a doctor's specialty (1-6): ");
 	flag = 0;
 	do {
 		if (flag)
@@ -235,7 +235,7 @@ void addDoc(struct data** head, int* cnt)
 	{
 		printf("[%d]%s\n", i + 1, days[i]);
 	}
-	printf("Select a doctor’s work day (1-5): ");
+	printf("Select a doctor's work day (1-5): ");
 	flag = 0;
 	do {
 		if (flag)
@@ -303,12 +303,12 @@ void edit(struct data* current)
 	flag = 0;
 	system("cls");
 	printf("Old specialty of the doctor: %s \n", current->spec);
-	printf("Enter a new doctor’s specialty:\n");
+	printf("Enter a new doctor's specialty:\n");
 	for (i = 0; i < 6; i++)
 	{
 		printf("[%d]%s\n", i + 1, spec[i]);
 	}
-	printf("Select a doctor’s specialty (1-6): ");
+	printf("Select a doctor's specialty (1-6): ");
 	flag = 0;
 	do {
 		if (flag)
@@ -329,9 +329,9 @@ void edit(struct data* current)
 	{
 		printf("[%d]%s\n", i + 1, days[i]);
 	}
-	printf("Select a doctor’s work day (1-5): ");
+	printf("Select a doctor's work day (1-5): ");
 	flag = 0;
-	
+
 	do {
 		if (flag)
 			printf("Incorrect value entered. Enter from 1 to 5: ");
@@ -342,10 +342,22 @@ void edit(struct data* current)
 	current->day = ivibor;
 	system("cls");
 	printf("Enter the work start time: ");
-	scanf("%d", &current->st_vis);
+	flag = 0;
+	do {
+		if (flag)
+			printf("Incorrect value entered. Enter from 8 to 24: ");
+		scanf("%d", &current->st_vis);
+		flag = 1;
+	} while (current->st_vis < 8 || current->st_vis > 24);
 	system("cls");
 	printf("Enter the work end time: ");
-	scanf("%d", &current->end_vis);
+	flag = 0;
+	do {
+		if (flag)
+			printf("Incorrect value entered. Enter from 8 to 24: ");
+		scanf("%d", &current->end_vis);
+		flag = 1;
+	} while (current->end_vis < 16 || current->end_vis > 24);
 }
 int main(void)
 {
@@ -363,7 +375,7 @@ int main(void)
 	do
 	{
 		system("cls");
-		printf("[0] Quit the program\n[1] Add a new doctor\n[2] Edit schedules\n[3] Fire a doctor\n[4] Bring out doctors in alphabetical order\n[5] The work of the office by day of the week\n[6] Doctor selection\nSelect a number from the list. : ");
+		printf("[0] Quit the program\n[1] Add a new doctor\n[2] Edit schedules\n[3] Fire a doctor\n[4] Bring out doctors in alphabetical order\n[5] The occupancy of the cabinet by day of the week\n[6] Doctor selection\nSelect a number from the list. : ");
 		scanf("%c", &main);
 		switch (main)
 		{
@@ -464,7 +476,7 @@ int main(void)
 			scanf("%d", &vibor);
 			system("CLS");
 			printf("=========================\n");
-			printf("Cabinet № %d\n", vibor);
+			printf("Cabinet - %d\n", vibor);
 			printf("=========================\n");
 			for (i = 0; i < 5; i++)
 			{
@@ -494,7 +506,7 @@ int main(void)
 			{
 				printf("[%d]%s\n", i + 1, spec[i]);
 			}
-			printf("Select a doctor’s specialty (1-6): ");
+			printf("Select a doctor's specialty (1-6): ");
 			flag = 0;
 			do {
 				if (flag)
