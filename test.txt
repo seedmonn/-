@@ -16,3 +16,18 @@ ENT
 Matchenko O.I.
 Dentist
 18 4 11 19
+Alatarev M.S.
+Surgeon
+5 4 8 17
+Batyrberkov K.B.
+Pediatrician
+24 1 8 24
+Chapligin A.A.
+Therapist
+21 3 9 21
+Zyulkov A.A.
+Surgeon
+27 5 8 17
+Ovsyanikov E.P.
+ENT
+25 2 16 16

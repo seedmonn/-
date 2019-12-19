@@ -55,6 +55,20 @@ struct data* deleteHead(struct data* head)
 	return(temp);
 }
 
+void savecurrent(struct data* head)
+{
+	FILE* fout;
+	struct data* current = head;
+	fout = fopen("test.txt", "a+");
+	while (current != NULL)
+	{
+		fprintf(fout, "%s\n", current->name);
+		fprintf(fout, "%s\n", current->spec);
+		fprintf(fout, "%d %d %d %d\n", current->num, current->day, current->st_vis, current->end_vis);
+		current = current->ptr;
+	}
+	fclose(fout);
+}
 void deleteDoc(struct data* lst, struct data* head)
 {
 	struct data* temp;
@@ -187,6 +201,7 @@ void save(struct data* head)
 		fprintf(fout, "%s\n", current->spec);
 		fprintf(fout, "%d %d %d %d\n", current->num, current->day, current->st_vis, current->end_vis);
 		current = current->ptr;
+
 	}
 	fclose(fout);
 }
@@ -291,6 +306,7 @@ void addDoc(struct data** head, int* cnt)
 		callback_int = atoi(callback_char);
 		current->end_vis = callback_int;
 	} while (callback_int < MIN_END_TIME || callback_int > MAX_END_TIME);
+	savecurrent(current);
 }
 void edit(struct data* current)
 {
@@ -382,6 +398,7 @@ void edit(struct data* current)
 		scanf("%d", &current->end_vis);
 		flag = 1;
 	} while (current->end_vis < MIN_END_TIME || current->end_vis > MAX_END_TIME);
+	/*savecurrent(current);*/
 }
 int main(void)
 {
