@@ -1,8 +1,32 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #define LEN 100
 #define SPC 20
+
+enum Doctors {
+
+	Surgeon = 1,
+	Ophthalmologist,
+	Therapist,
+	Pediatrician,
+	ENT,
+	Dentist
+};
+enum Days {
+	Monday = 1,
+	Thuesday,
+	Wednesday,
+	Thursday,
+	Friday
+};
+enum Worktime {
+	MIN_START_TIME = 8,
+	MAX_START_TIME = 16,
+	MIN_END_TIME = 16,
+	MAX_END_TIME = 24
+};
 
 struct data
 {
@@ -225,7 +249,7 @@ void addDoc(struct data** head, int* cnt)
 		scanf("%s", &callback_char);
 		flag = 1;
 		callback_int = atoi(callback_char);
-	} while (callback_int < 1 || callback_int > 6);
+	} while (callback_int < Surgeon || callback_int > Dentist);
 	strcpy(current->spec, spec[callback_int - 1]);
 	system("cls");
 	printf("Enter your cabinet number: ");
@@ -243,19 +267,19 @@ void addDoc(struct data** head, int* cnt)
 		scanf("%s", &callback_char);
 		flag = 1;
 		callback_int = atoi(callback_char);
-	} while (callback_int < 1 || callback_int > 5);
+	} while (callback_int < Monday || callback_int > Friday);
 	current->day = callback_int;
 	system("cls");
 	printf("Enter the work start time: ");
 	flag = 0;
 	do {
 		if (flag)
-			printf("Incorrect value entered. Enter from 8 to 24: ");
+			printf("Incorrect value entered. Enter from 8 to 16: ");
 		scanf("%s", &callback_char);
 		flag = 1;
 		callback_int = atoi(callback_char);
 		current->st_vis = callback_int;
-	} while (callback_int < 8 || callback_int > 24);
+	} while (callback_int < MIN_START_TIME || callback_int > MAX_START_TIME);
 	system("cls");
 	printf("Enter the work end time: ");
 	flag = 0;
@@ -266,7 +290,7 @@ void addDoc(struct data** head, int* cnt)
 		flag = 1;
 		callback_int = atoi(callback_char);
 		current->end_vis = callback_int;
-	} while (callback_int < 16 || callback_int > 24);
+	} while (callback_int < MIN_END_TIME || callback_int > MAX_END_TIME);
 }
 void edit(struct data* current)
 {
@@ -338,17 +362,17 @@ void edit(struct data* current)
 		scanf("%s", &vibor);;
 		ivibor = atoi(vibor);
 		flag = 1;
-	} while ((ivibor < 1) || (ivibor > 5));
+	} while ((ivibor < Monday) || (ivibor > Friday));
 	current->day = ivibor;
 	system("cls");
 	printf("Enter the work start time: ");
 	flag = 0;
 	do {
 		if (flag)
-			printf("Incorrect value entered. Enter from 8 to 24: ");
+			printf("Incorrect value entered. Enter from 8 to 16: ");
 		scanf("%d", &current->st_vis);
 		flag = 1;
-	} while (current->st_vis < 8 || current->st_vis > 24);
+	} while (current->st_vis < MIN_START_TIME || current->st_vis > MAX_START_TIME);
 	system("cls");
 	printf("Enter the work end time: ");
 	flag = 0;
@@ -357,7 +381,7 @@ void edit(struct data* current)
 			printf("Incorrect value entered. Enter from 8 to 24: ");
 		scanf("%d", &current->end_vis);
 		flag = 1;
-	} while (current->end_vis < 16 || current->end_vis > 24);
+	} while (current->end_vis < MIN_END_TIME || current->end_vis > MAX_END_TIME);
 }
 int main(void)
 {
@@ -513,7 +537,7 @@ int main(void)
 					printf("Incorrect value entered. Enter from 1 to 6:");
 				scanf("%d", &vibor);
 				flag = 1;
-			} while ((vibor < 1) || (vibor > 6));
+			} while ((vibor < Surgeon) || (vibor > Dentist));
 			system("CLS");
 			current = head;
 			i = 1;
