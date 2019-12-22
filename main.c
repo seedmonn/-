@@ -424,6 +424,7 @@ void edit(struct data* current)
 	system("cls");
 	savecurrent(current);
 }
+
 int main(void)
 {
 	system("chcp 1251");
@@ -653,7 +654,7 @@ int main(void)
 			} while (ivibor < Surgeon || ivibor > Dentist);
 			system("cls");
 			printf("==================================================\n");
-			printf("Specialization - %s\n", spec[--ivibor]);
+			printf("Specialization - %s | Cab. - %d\n", spec[--ivibor], bufhour);
 			printf("==================================================\n");
 				for (i = 1; i < 6; i++)
 			{
