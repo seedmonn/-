@@ -27,6 +27,10 @@ enum Worktime {
 	MIN_END_TIME = 16,
 	MAX_END_TIME = 24
 };
+enum Cabinet {
+	MIN_NUM_OF_CAB = 1,
+	MAX_NUM_OF_CAB = 99
+};
 
 struct data
 {
@@ -228,7 +232,7 @@ void addDoc(struct data** head, int* cnt)
 		(*cnt)++;
 	}
 	system("cls");
-	printf("Enter name of doctor:\nName: ");
+	printf("Enter a name in the format Name N.N. : ");
 	flag = 0;
 	do {
 		if (flag)
@@ -267,14 +271,22 @@ void addDoc(struct data** head, int* cnt)
 	} while (callback_int < Surgeon || callback_int > Dentist);
 	strcpy(current->spec, spec[callback_int - 1]);
 	system("cls");
-	printf("Enter your cabinet number: ");
-	scanf("%d", &current->num);
+	printf("Enter the cabinet number (1-99): ");
+	flag = 0;
+	do {
+		if (flag)
+			printf("Enter correct the cabinet number (1-99): ");
+		scanf("%s", &callback_char);
+		flag = 1;
+		callback_int = atoi(callback_char);
+		current->num = callback_int;
+	} while (callback_int < MIN_NUM_OF_CAB || callback_int > MAX_NUM_OF_CAB);
 	system("cls");
 	for (i = 0; i < 5; i++)
 	{
 		printf("[%d]%s\n", i + 1, days[i]);
 	}
-	printf("Select a doctor's work day (1-5): ");
+	printf("Select a doctor's work day (1-5): \n");
 	flag = 0;
 	do {
 		if (flag)
@@ -285,7 +297,7 @@ void addDoc(struct data** head, int* cnt)
 	} while (callback_int < Monday || callback_int > Friday);
 	current->day = callback_int;
 	system("cls");
-	printf("Enter the work start time: ");
+	printf("Enter the work start time from 8 to 16:");
 	flag = 0;
 	do {
 		if (flag)
@@ -296,11 +308,11 @@ void addDoc(struct data** head, int* cnt)
 		current->st_vis = callback_int;
 	} while (callback_int < MIN_START_TIME || callback_int > MAX_START_TIME);
 	system("cls");
-	printf("Enter the work end time: ");
+	printf("Enter the work end time from 16 to 24: ");
 	flag = 0;
 	do {
 		if (flag)
-			printf("Incorrect value entered. Enter from 8 to 24: ");
+			printf("Incorrect value entered. Enter from 16 to 24: ");
 		scanf("%s", &callback_char);
 		flag = 1;
 		callback_int = atoi(callback_char);
@@ -311,7 +323,7 @@ void addDoc(struct data** head, int* cnt)
 void edit(struct data* current)
 {
 	int i;
-	char vibor[2];
+	char vibor[3];
 	int ivibor = 0;
 	int flag;
 	char* ptr;
@@ -340,7 +352,6 @@ void edit(struct data* current)
 			ptr++;
 		}
 	} while (flag);
-	flag = 0;
 	system("cls");
 	printf("Old specialty of the doctor: %s \n", current->spec);
 	printf("Enter a new doctor's specialty:\n");
@@ -358,11 +369,18 @@ void edit(struct data* current)
 		flag = 1;
 	} while ((ivibor < 1) || (ivibor > 6));
 	strcpy(current->spec, spec[ivibor - 1]);
-	flag = 0;
 	system("cls");
 	printf("Old cabinet number: %d\n", current->num);
-	printf("Enter the new cabinet number: ");
-	scanf("%d", &current->num);
+	printf("Enter the new cabinet number (1 - 99): ");
+	flag = 0;
+	do {
+		if (flag)
+			printf("Incorrect value entered. Enter from 1 to 99: ");
+		scanf("%s", &vibor);
+		ivibor = atoi(vibor);
+		flag = 1;
+	} while ((ivibor < MIN_NUM_OF_CAB) || (ivibor > MAX_NUM_OF_CAB));
+	current->num = ivibor;
 	system("cls");
 	printf("Former doctor's work day: %s \n", days[current->day - 1]);
 	for (i = 0; i < 5; i++)
@@ -371,7 +389,6 @@ void edit(struct data* current)
 	}
 	printf("Select a doctor's work day (1-5): ");
 	flag = 0;
-
 	do {
 		if (flag)
 			printf("Incorrect value entered. Enter from 1 to 5: ");
@@ -381,23 +398,30 @@ void edit(struct data* current)
 	} while ((ivibor < Monday) || (ivibor > Friday));
 	current->day = ivibor;
 	system("cls");
-	printf("Enter the work start time: ");
+	printf("Former doctor's work start time: %d\n", current->st_vis);
+	printf("Enter the new work start time (8-16): ");
 	flag = 0;
 	do {
 		if (flag)
 			printf("Incorrect value entered. Enter from 8 to 16: ");
-		scanf("%d", &current->st_vis);
+		scanf("%s", &vibor);;
+		ivibor = atoi(vibor);
 		flag = 1;
-	} while (current->st_vis < MIN_START_TIME || current->st_vis > MAX_START_TIME);
+	} while ((ivibor < MIN_START_TIME) || (ivibor > MAX_START_TIME));
+	current->st_vis = ivibor;
 	system("cls");
-	printf("Enter the work end time: ");
+	printf("Former doctor's work end time: %d \n", current->end_vis);
+	printf("Enter the new work end time from 16 to 24: ");
 	flag = 0;
 	do {
 		if (flag)
-			printf("Incorrect value entered. Enter from 8 to 24: ");
-		scanf("%d", &current->end_vis);
+			printf("Incorrect value entered. Enter from 16 to 24: ");
+		scanf("%s", &vibor);;
+		ivibor = atoi(vibor);
 		flag = 1;
-	} while (current->end_vis < MIN_END_TIME || current->end_vis > MAX_END_TIME);
+	} while ((ivibor < MIN_END_TIME) || (ivibor > MAX_END_TIME));
+	current->end_vis = ivibor;
+	system("cls");
 	savecurrent(current);
 }
 int main(void)
@@ -406,9 +430,8 @@ int main(void)
 	system("cls");
 	struct data* head = NULL;
 	struct data* current = NULL;
-	int vibor;
-	int flag = 0;
-	int count = 0, i = 0;
+	char vibor[3];
+	int count = 0, i = 0, flag = 0, ivibor = 0, bufhour = 0;
 	char spec[6][20] = { "Surgeon", "Ophthalmologist", "Therapist", "Pediatrician", "ENT", "Dentist" };
 	char days[5][20] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 	char main;
@@ -416,7 +439,7 @@ int main(void)
 	do
 	{
 		system("cls");
-		printf("[0] Quit the program\n[1] Add a new doctor\n[2] Edit schedules\n[3] Fire a doctor\n[4] Bring out doctors in alphabetical order\n[5] The occupancy of the cabinet by day of the week\n[6] Doctor selection\nSelect a number from the list. : ");
+		printf("[0] Quit the program\n[1] Add a new doctor\n[2] Edit info about doctor\n[3] Dismiss a doctor\n[4] Sort doctors by alphabetical order\n[5] Sort by number of cabinet\n[6] Sort by specialization & alphabetical order\n[7] Sort by specialization & work time\n Select a number from the list: ");
 		scanf("%c", &main);
 		switch (main)
 		{
@@ -440,9 +463,16 @@ int main(void)
 				current = current->ptr;
 			}
 			printf("Select a doctor to change: ");
-			scanf("%d", &vibor);
+			flag = 0;
+			do {
+				if (flag)
+					printf("Incorrect value entered. Enter again: ");
+				scanf("%s", &vibor);
+				ivibor = atoi(vibor);
+				flag = 1;
+			} while ((ivibor < 1) || (ivibor > count));
 			current = head;
-			for (i = 0; i < vibor - 1; i++)
+			for (i = 0; i < ivibor - 1; i++)
 			{
 				current = current->ptr;
 			}
@@ -465,13 +495,20 @@ int main(void)
 				current = current->ptr;
 			}
 			printf("Select a doctor to dismiss: ");
-			scanf("%d", &vibor);
+			flag = 0;
+			do {
+				if (flag)
+					printf("Incorrect value entered. Enter again: ");
+				scanf("%s", &vibor);
+				ivibor = atoi(vibor);
+				flag = 1;
+			} while ((ivibor < 1) || (ivibor > count));
 			current = head;
-			for (i = 0; i < vibor - 1; i++)
+			for (i = 0; i < ivibor - 1; i++)
 			{
 				current = current->ptr;
 			}
-			if (vibor == 1)
+			if (ivibor == 1)
 			{
 				head = deleteHead(current);
 
@@ -499,7 +536,7 @@ int main(void)
 				printf("Name: %s\n", current->name);
 				printf("Cabinet: %d\n", current->num);
 				printf("Day: %s\n", days[(current->day) - 1]);
-				printf("Start/End work time: from %d to %d\n", current->st_vis, current->end_vis);
+				printf("Start/End work time: from |%d:00 - %d:00|\n", current->st_vis, current->end_vis);
 				i++;
 				current = current->ptr;
 			}
@@ -513,22 +550,30 @@ int main(void)
 				system("pause");
 				break;
 			}
-			printf("Enter your cabinet number: ");
-			scanf("%d", &vibor);
+			printf("Enter the cabinet number (1-99): ");
+			flag = 0;
+			do {
+				if (flag)
+					printf("Incorrect value entered. Enter again: ");
+				scanf("%s", &vibor);
+				ivibor = atoi(vibor);
+				flag = 1;
+			} while ((ivibor < MIN_NUM_OF_CAB) || (ivibor > MAX_NUM_OF_CAB));
 			system("CLS");
-			printf("=========================\n");
-			printf("Cabinet - %d\n", vibor);
-			printf("=========================\n");
-			for (i = 0; i < 5; i++)
+			printf("==================================================\n");
+			printf("Cabinet - %d\n", ivibor);
+			printf("==================================================\n");
+			for (i = 1; i < 6; i++)
 			{
-				printf("-------------------------\n");
-				printf("%s\n", days[i]);
-				printf("-------------------------\n");
+				printf("__________________________________________________\n");
+				printf("%s\n", days[--i]);
+				printf("__________________________________________________\n");
 				current = head;
+				i++;
 				while (current != NULL)
 				{
-					if (current->num == vibor && current->day == i)
-						printf("%d - %d\n", current->st_vis, current->end_vis);
+					if (current->num == ivibor && current->day == i)
+						printf("\n%s - %s |%d:00 - %d:00|\n", current->name, current->spec,current->st_vis, current->end_vis);
 					current = current->ptr;
 				}
 				printf("\n");
@@ -551,26 +596,79 @@ int main(void)
 			flag = 0;
 			do {
 				if (flag)
-					printf("Incorrect value entered. Enter from 1 to 6:");
-				scanf("%d", &vibor);
+					printf("Incorrect value entered. Enter from 1 to 6: ");
+				scanf("%s", &vibor);
+				ivibor = atoi(vibor);
 				flag = 1;
-			} while ((vibor < Surgeon) || (vibor > Dentist));
+			} while ((ivibor < Surgeon) || (ivibor > Dentist));
 			system("CLS");
 			current = head;
 			i = 1;
 			while (current != NULL)
 			{
-				if (!strcmp(current->spec, spec[vibor - 1]))
+				if (!strcmp(current->spec, spec[ivibor - 1]))
 				{
 					printf("------[%d]------\n", i);
 					printf("Specialty: %s\n", current->spec);
 					printf("Name: %s\n", current->name);
 					printf("Cabinet: %d\n", current->num);
 					printf("Day: %s\n", days[(current->day) - 1]);
-					printf("Start/End work time from %d to %d\n", current->st_vis, current->end_vis);
+					printf("Start/End work time from |%d:00 - %d:00|\n\n", current->st_vis, current->end_vis);
 					i++;
 				}
 				current = current->ptr;
+			}
+			system("pause");
+			break;
+		case '7':
+			system("CLS");
+			if (!count)
+			{
+				printf("No doctors\n");
+				system("pause");
+				break;
+			}
+			printf("Enter your visitng hours (8-24):\n");
+			flag = 0;
+			do {
+				if (flag)
+					printf("Incorrect value entered. Enter again (8-24): ");
+				scanf("%s", &vibor);
+				bufhour = atoi(vibor);
+				flag = 1;
+			} while ((bufhour < MIN_START_TIME) || (bufhour > MAX_END_TIME));
+			system("CLS");
+			for (i = 0; i < 6; i++)
+			{
+				printf("[%d]%s\n", i + 1, spec[i]);
+			}
+			printf("Select a doctor's specialty (1-6): ");
+			flag = 0;
+			do {
+				if (flag)
+					printf("Incorrect value entered. Enter from 1 to 6: ");
+				scanf("%s", &vibor);
+				flag = 1;
+				ivibor = atoi(vibor);
+			} while (ivibor < Surgeon || ivibor > Dentist);
+			system("cls");
+			printf("==================================================\n");
+			printf("Specialization - %s\n", spec[--ivibor]);
+			printf("==================================================\n");
+				for (i = 1; i < 6; i++)
+			{
+				printf("__________________________________________________\n");
+				printf("%s\n", days[--i]);
+				printf("__________________________________________________\n");
+				current = head;
+				i++;
+				while (current != NULL)
+				{
+					if ((strcmp(current->spec, spec[ivibor]) == 0) && (bufhour >= current->st_vis && bufhour <= current->end_vis) && (current->day == i))
+						printf("\n%s - %s |%d:00 - %d:00| Cab.:%d\n", current->name, current->spec, current->st_vis, current->end_vis, current->num);
+					current = current->ptr;
+				}
+				printf("\n");
 			}
 			system("pause");
 			break;

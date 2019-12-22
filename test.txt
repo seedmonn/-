@@ -1,39 +1,66 @@
 Alatarev M.S.
 Surgeon
-5 4 8 17
+27 2 8 17
 Batin A.A.
 Pediatrician
 10 3 12 20
 Batyrberkov K.B.
 Pediatrician
-24 1 8 24
+10 1 8 20
 Belyaeva G.S.
 Surgeon
-23 2 8 20
+27 4 8 20
+Blohin I.Y.
+Dentist
+18 5 10 18
+Buligin S.S.
+Ophthalmologist
+26 5 10 21
 Chapligin A.A.
 Therapist
-21 3 9 21
+21 3 8 16
+Chapligina S.G.
+Therapist
+21 3 16 20
+Demina I.Y.
+Ophthalmologist
+26 3 12 18
+Kopytina O.A.
+Therapist
+21 5 12 24
 Matchenko O.I.
 Dentist
-18 4 11 19
+18 1 11 19
+Melnikova E.S.
+Dentist
+18 3 11 19
+Naumova A.A.
+Therapist
+22 2 11 23
+Panina O.N.
+Therapist
+22 4 8 20
 Pavlova A.H.
 Therapist
-21 4 8 20
+21 4 9 21
+Saidov S.T.
+ENT
+56 2 9 21
 Semenova N.V.
 Ophthalmologist
-3 5 9 21
-Serega D.D.
+26 1 9 21
+Sergeeva T.N.
+ENT
+56 4 8 16
+Sokolova O.A.
 Pediatrician
-25 5 8 20
+10 5 9 17
 Trushkova U.A.
 ENT
-12 1 10 18
+56 1 10 18
+Zaharova E.A.
+Therapist
+22 1 10 22
 Zyulkov A.A.
 Surgeon
 27 5 8 17
-Zyulkov A.A.
-ENT
-27 4 8 20
-AAAAAAAAAAAAAAAAAAAAA. a.a
-Surgeon
--842150451 1 16 23
