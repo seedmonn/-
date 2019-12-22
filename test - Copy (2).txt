@@ -1,0 +1,33 @@
+Belyaeva G.S.
+Surgeon
+23 2 8 20
+Semenova N.V.
+Ophthalmologist
+3 5 9 21
+Pavlova A.H.
+Therapist
+21 4 8 20
+Batin A.A.
+Pediatrician
+10 3 12 20
+Trushkova U.A.
+ENT
+12 1 10 18
+Matchenko O.I.
+Dentist
+18 4 11 19
+Alatarev M.S.
+Surgeon
+5 4 8 17
+Batyrberkov K.B.
+Pediatrician
+24 1 8 24
+Chapligin A.A.
+Therapist
+21 3 9 21
+Zyulkov A.A.
+Surgeon
+27 5 8 17
+Ovsyanikov E.P.
+ENT
+25 2 16 16

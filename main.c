@@ -398,7 +398,7 @@ void edit(struct data* current)
 		scanf("%d", &current->end_vis);
 		flag = 1;
 	} while (current->end_vis < MIN_END_TIME || current->end_vis > MAX_END_TIME);
-	/*savecurrent(current);*/
+	savecurrent(current);
 }
 int main(void)
 {
